@@ -1,0 +1,29 @@
+<section id="dragAndDrop" (onFileDrop)="dropFile($event)" (dragenter)="allowDrop($event)" (dragleave)="allowDrop($event)" (drop)="dropFile($event)" (dragover)="allowDrop($event)">
+  <form action="" name="myForm" id="myForm">
+    <input type="file" name="userFile" formControlName="file" (change)="loadFile($event)">
+  </form>
+
+  <progress min="1" max="100" [value]="progressWidth">{{stringifyWidth()}}</progress>
+
+  <!--<div class="progress-bar blue stripes">-->
+    <!--<span class="green" [ngStyle]="{'width': stringifyWidth()}"></span>-->
+  <!--</div>-->
+
+  <file-drop headertext="Drop files here" (onFileDrop)="dropFile($event)"
+             (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"></file-drop>
+
+</section>
+
+
+<table>
+  <tr>
+    <td (click)="sortingBy('name')">name</td>
+    <td (click)="sortingBy('age')">age</td>
+    <td (click)="sortingBy('action')">action</td>
+  </tr>
+  <tr *ngFor="let item of informationArray">
+    <td>{{item.name}}</td>
+    <td>{{item.age}}</td>
+    <td>{{item.action}}</td>
+  </tr>
+</table>
