@@ -1,29 +1,56 @@
-<section id="dragAndDrop" (onFileDrop)="dropFile($event)" (dragenter)="allowDrop($event)" (dragleave)="allowDrop($event)" (drop)="dropFile($event)" (dragover)="allowDrop($event)">
-  <form action="" name="myForm" id="myForm">
-    <input type="file" name="userFile" formControlName="file" (change)="loadFile($event)">
-  </form>
+<section id="dragAndDrop" class="upload-list-container" (dragenter)="allowDrop($event)" (dragleave)="allowDrop($event)" (drop)="dropFile($event)" (dragover)="allowDrop($event)">
+  <span (click)="backToListManager()" class="upload-list-cancel">X</span>
 
-  <progress min="1" max="100" [value]="progressWidth">{{stringifyWidth()}}</progress>
+  <img src="../../../assets/img/cloud_icon.png" height="37" width="56" alt="">
+  <span class="upload-list-dnd-text">Drag and Drop anywhere to upload</span>
+
+  <div class="upload-list-divider">
+    <div>or</div>
+  </div>
+
+  <section class="upload-list-blocks">
+    <!--<input type="file" (change)="loadFile($event)">-->
+    <div class="upload-list-block" (click)="loadFile($event)">
+      <img src="../../../assets/img/upload_icon.jpg" alt="" height="45" width="50">
+      <span class="upload-list-block_main-text">Add File(s)</span>
+      <span class="upload-list-block_subtext">from your computer</span>
+    </div>
+    <div class="upload-list-block">
+      <img src="../../../assets/img/copy_icon.png" alt="" height="47" width="45">
+      <span class="upload-list-block_main-text">Build from Existing Lists</span>
+      <span class="upload-list-block_subtext">in ECM</span>
+    </div>
+    <div class="upload-list-block">
+      <img src="../../../assets/img/single_file_icon.png" alt="" height="45" width="39">
+      <span class="upload-list-block_main-text">Create Custom Audience </span>
+      <span class="upload-list-block_subtext"> from MDR’s database  </span>
+    </div>
+  </section>
+
+  <!--<form action="" name="myForm" id="myForm">-->
+    <!--<input type="file" name="userFile" formControlName="file" (change)="loadFile($event)">-->
+  <!--</form>-->
+
+  <!--<progress min="1" max="100" [value]="progressWidth">{{stringifyWidth()}}</progress>-->
 
   <!--<div class="progress-bar blue stripes">-->
     <!--<span class="green" [ngStyle]="{'width': stringifyWidth()}"></span>-->
   <!--</div>-->
 
-  <file-drop headertext="Drop files here" (onFileDrop)="dropFile($event)"
-             (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"></file-drop>
+  <!--<file-drop headertext="Drop files here" (onFileDrop)="dropFile($event)"></file-drop>-->
 
 </section>
 
 
-<table>
-  <tr>
-    <td (click)="sortingBy('name')">name</td>
-    <td (click)="sortingBy('age')">age</td>
-    <td (click)="sortingBy('action')">action</td>
-  </tr>
-  <tr *ngFor="let item of informationArray">
-    <td>{{item.name}}</td>
-    <td>{{item.age}}</td>
-    <td>{{item.action}}</td>
-  </tr>
-</table>
+<!--<table>-->
+  <!--<tr>-->
+    <!--<td (click)="sortingBy('name')">name</td>-->
+    <!--<td (click)="sortingBy('age')">age</td>-->
+    <!--<td (click)="sortingBy('action')">action</td>-->
+  <!--</tr>-->
+  <!--<tr *ngFor="let item of informationArray">-->
+    <!--<td>{{item.name}}</td>-->
+    <!--<td>{{item.age}}</td>-->
+    <!--<td>{{item.action}}</td>-->
+  <!--</tr>-->
+<!--</table>-->

@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {VideoCatalogService} from '../video-catalog/services/video-catalog.service';
 import {UploadEvent} from 'ngx-file-drop';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -9,6 +10,7 @@ import {UploadEvent} from 'ngx-file-drop';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
+  token: string;
   form: FormGroup;
   progressWidth = 0;
   informationArray = [
@@ -28,7 +30,9 @@ export class MainPageComponent implements OnInit {
   ];
   constructor(
     private _fb: FormBuilder,
-    private _service: VideoCatalogService
+    private _service: VideoCatalogService,
+    private _router: Router,
+    private _activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -47,7 +51,7 @@ export class MainPageComponent implements OnInit {
     });
   }
   loadFile(event) {
-    const file = event.target.files[0];
+    const file = event.target.files[0] || event.dataTransfer.files[0];
 
     const formData = new FormData();
 
@@ -78,18 +82,11 @@ export class MainPageComponent implements OnInit {
     this.preventDefaultAction(ev);
   }
 
-  dropFile(ev: UploadEvent) {
-    const files = ev.files; // empty list
-    console.log(ev);
-      this.loadFile(files[0]);
-  }
+  dropFile(ev: DragEvent) {
+    const files = ev.dataTransfer.files; // empty list
+    const items = ev.dataTransfer.items;
 
-  public fileOver(event) {
-    console.log(event);
-  }
-
-  public fileLeave(event) {
-    console.log(event);
+    console.log(items, files);
   }
 
   sortingBy(value: string) {
@@ -106,4 +103,7 @@ export class MainPageComponent implements OnInit {
     return 0;
   }
 
+  backToListManager() {
+    this._router.navigate(['/list-manager']);
+  }
 }
