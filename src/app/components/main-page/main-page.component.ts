@@ -36,22 +36,22 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    sessionStorage.setItem('sessionToken', 'zQ94UKDjUC87YbQB5AS5ogfoZDNw6f9fUbEtocWNedEB0tLyI6l' +
-      'Cy316BiKUeQ5gqtpg22rWsTfBakd0B+yBb5z43mS7HcP2+5DUS07CdEJc1HlnNWn0vxh6Ib8YQb2eJODgiD9VO7bAMgpEfksXDdfkuUpR' +
-      'FyL5tNln5dMNt+Z6fsLpUgtWVMrCn6MiJ71xXI6+c2yxm04bYPeGP7UTdepNPuEV1B7uRfK9n4oU/5PAAqaBIITaXxfvfGnas46ANsCC+WK1CGUCDXEYnZFGNi7/' +
-      'KqprWRiQkCrwfc/igNfcvrGd/zkmo+iqs+qC0WMTcaSM+yb6tYf32ruVMZi8bncYPzyTT6PqkuX2dyCpDFML2iinfGRYxgj/' +
-      'L6tanZ4/HVOLxRyfetE3Qcot25HRv+GcNYSuG1EJB5SlSMBYhHPqA1bXXXeq6+KjBYySHJljsiPXZL3VD8NB+tJQY7KcxNb1vL/L7' +
-      'u9SLHz26SiSpRDW4yPUpxWaEupc95cr2DCOEebwCGrSuqAOO9kCu/7GvRYLacb2KU3lCcajRo+Vwj0MtQz8MWvGmKxZ7dlHpR2e8XlUhO' +
-      'nSGLnx6quMCsI1EX4rRMMoGoxZKewFMiiEQncw6lEjxubA83mPVfJYbvojS19GlrTC3uvTtHoBluL+R5zs/+RqI6bcKVGE/Mkjp' +
-      'r1Xj55Ta4WN3at8PjsPiOdE2UFxJNCupWfSbSdRu+NxCJR89RKAp1ZkF778Drod9aAcFftQ72OYE/+YQApEzYQcjWgGdAIRP' +
-      'k5I2R0uuxtgSbm9VBiUbO369F7SLFrvYjrPAK6a1U658R3r6x+3SDFe92r8ThHP4SeY/LlAyOS5SZxikuE+BW5YaAxurlw' +
-      'ShLSkimZO+B/iVSRCyfHdfCXvTc31LB1JKujIFbhfuf4bjhZ6sOX417zqEyPdK1UyD3aQvBzx7VfY2vzz405Jecpd');
+    sessionStorage.setItem('sessionToken', 'mBeL71uYKHXYyfx1fgY24uT49P9nhB8SN43UEc5Jc8a6W1cRXxDJ9dCmAIws218VivPkv5rF/et3BNGmcgzeCCOBm' +
+      'z+xqohhjNdt2Lv2iXoLEzVUO8fIwYOBxoJgIAnGYmopTnS4EMbW7wpphrMCfr8jELG8l1cAxB03X3iJdDezW8V2vDJ211JyzijXTZ+g7ubHhjyZAXs7xD1v' +
+      'rnUdny8o5bEmMIeyp3r1oONjuYmqp9kX4uU8z+KgRBDYoZXiTL6mHpyKerp6QtNVB2IEVuHt11P1V8ImfxFcrCaejuMafNGuU4j7Jwt+wnwRUL7FxqY' +
+      '8DO5OQwrarPJzwWma9hYWHfVYNRu4zCIA8lKzALyzvdyc1AWQODSaSlF3YMdEshpJu79xfKHTDz3uKFNd39jcustGU9oJoEopiPbCanGVePfc+hOY/' +
+      'zDDdwMmHFObwjCm68AtUxbQtXs6lknys0CXltRa0O8g2NmpYDqB8W+fLsyKB2SjIy6Hd+XuOw2hGAC9EByLkLv6HyLf8vAD4Yo4iktBwUpGYSNPGc' +
+      'vCCxf361JF0JwFdhJbsEFxUKeHEvZ0U/0HHXb5cdD2/ykn7WWSdUOoDxgcqzMUus7+zs/4tRvAxIdtZ1/dzMqTmtoU2ae4RlFirpyl5Igc+OJLcFs' +
+      'UvtiXJWehKQofS4iq8asXqMXA47W7D+BCOvJxt2E6BCXeV0cvmbO/fwIb9i8hm9u6R+xAaOzl3+o45KWKvFY6muwNwqJw8+IyL96SI9n1Mtex+bP' +
+      'QuZgj+a91uY5hrcR72dC671EdUVzEr8NKicCDCxKI0bEEcUmVYZjAW5z7yv7F5grczj8JSYCAJ6R23pfl05i2fJj08dddO/v5gpp6RwvNMZ/YQEd' +
+      'iWMI6w1phvp570KMYmCURYxvqmOZQ6dtftFdNIL4p53wHlUK0lwSmcXkEYWda3/whtSJJF7YZ');
     this.form = this._fb.group({
       file: ['']
     });
   }
   loadFile(event) {
-    const file = event.target.files[0] || event.dataTransfer.files[0];
+    this.preventDefaultAction(event);
+    const file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
 
     const formData = new FormData();
 
@@ -82,12 +82,11 @@ export class MainPageComponent implements OnInit {
     this.preventDefaultAction(ev);
   }
 
-  dropFile(ev: DragEvent) {
-    const files = ev.dataTransfer.files; // empty list
-    const items = ev.dataTransfer.items;
-
-    console.log(items, files);
-  }
+  // dropFile(ev: DragEvent) {
+  //   const files = ev.dataTransfer.files;
+  //
+  //   this.loadFile(ev);
+  // }
 
   sortingBy(value: string) {
     this.informationArray.sort((a, b) => this.compare(a, b, value));

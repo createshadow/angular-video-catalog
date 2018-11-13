@@ -1,16 +1,16 @@
-<section id="dragAndDrop" class="upload-list-container" (dragenter)="allowDrop($event)" (dragleave)="allowDrop($event)" (drop)="dropFile($event)" (dragover)="allowDrop($event)">
+<section id="dragAndDrop" class="upload-list-container" (dragenter)="allowDrop($event)" (dragleave)="allowDrop($event)" (drop)="loadFile($event)" (dragover)="allowDrop($event)">
   <span (click)="backToListManager()" class="upload-list-cancel">X</span>
 
-  <img src="../../../assets/img/cloud_icon.png" height="37" width="56" alt="">
+  <img src="../../../assets/img/cloud_icon.png" height="37" width="56" alt="" class="upload-list_cloud-image">
   <span class="upload-list-dnd-text">Drag and Drop anywhere to upload</span>
 
   <div class="upload-list-divider">
-    <div>or</div>
+    <span>or</span>
   </div>
 
   <section class="upload-list-blocks">
-    <!--<input type="file" (change)="loadFile($event)">-->
-    <div class="upload-list-block" (click)="loadFile($event)">
+    <div class="upload-list-block">
+      <input type="file" (change)="loadFile($event)">
       <img src="../../../assets/img/upload_icon.jpg" alt="" height="45" width="50">
       <span class="upload-list-block_main-text">Add File(s)</span>
       <span class="upload-list-block_subtext">from your computer</span>
@@ -25,6 +25,22 @@
       <span class="upload-list-block_main-text">Create Custom Audience </span>
       <span class="upload-list-block_subtext"> from MDR’s database  </span>
     </div>
+  </section>
+
+  <section class="upload-list_name-confirm">
+    <span (click)="backToListManager()" class="upload-list-cancel">X</span>
+    <span class="upload-list_file-name">
+      Software_Upgrade_Campaign.csv
+    </span>
+
+    <button class="upload-list_name-confirm_button">Next</button>
+
+  </section>
+
+  <section class="upload-list_progress">
+    <span (click)="backToListManager()" class="upload-list-cancel">X</span>
+
+    <progress min="1" max="100" [value]="progressWidth">{{stringifyWidth()}}</progress>
   </section>
 
   <!--<form action="" name="myForm" id="myForm">-->
